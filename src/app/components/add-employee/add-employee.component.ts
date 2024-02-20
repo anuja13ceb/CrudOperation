@@ -28,7 +28,7 @@ export class AddEmployeeComponent implements OnInit {
     this.empServise.addEmployee(this.appEmployeeRequest)
     .subscribe({
       next:(response) => {
-        this.router.navigate(['employee']);
+        this.router.navigate(['employees']);
       }
     });
 

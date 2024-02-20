@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from 'src/app/models/employee';
 import { EmployeeService } from 'src/app/services/employee.service';
 
@@ -10,7 +10,9 @@ import { EmployeeService } from 'src/app/services/employee.service';
 })
 export class EmployeeDetailsComponent implements OnInit {
 
-  constructor(private empService : EmployeeService, private route: ActivatedRoute) { } //ActivatedRoute service
+
+  constructor(private empService : EmployeeService, private route: ActivatedRoute, 
+    private router:Router) { } //ActivatedRoute service
 
   viewEmployeeRequest: Employee ={
     id: '',
@@ -20,6 +22,8 @@ export class EmployeeDetailsComponent implements OnInit {
     salary: 0,
     department: ''
   };
+
+ 
 
   ngOnInit(): void {
    this.getById(); //on page-load this will first load
@@ -40,6 +44,27 @@ export class EmployeeDetailsComponent implements OnInit {
       });
     }
     });
+  }
+
+  updateEmployee(){
+    this.empService.updateEmployee(this.viewEmployeeRequest)
+    .subscribe({
+      next : (reponse) => {
+        //this.viewEmployeeRequest=reponse;
+        if(reponse){
+          this.router.navigate(['employees']);
+        }
+      }
+    })
+  }
+
+  deleteEmployee(id : any){
+    this.empService.deleteEmployee(id)
+    .subscribe({
+      next : (Response) => {
+        this.router.navigate(['employees'])
+      }
+    })
   }
 
 }

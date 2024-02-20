@@ -31,6 +31,9 @@
                 <input type="text" class="form-control" id="department" name="department"
                     [(ngModel)]="viewEmployeeRequest.department">
             </div>
+
+            <button class="btn btn btn-primary mr-3" (click)="updateEmployee()">Update</button>
+            <button class="btn btn btn-danger" (click)="deleteEmployee(viewEmployeeRequest.id)">Delete</button>
         </form>
     </div>
 </div>

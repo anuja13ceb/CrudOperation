@@ -26,4 +26,12 @@ url : string = environment.baseApiUrl;
   getById(employeeId: any) : Observable<Employee>{
    return  this.http.get<Employee>(this.url + 'api/Employee/' + employeeId);
   }
+
+  updateEmployee( updateEmployeeRequest: Employee):Observable<Employee>{
+   return  this.http.put<Employee>(this.url + 'api/Employee' , updateEmployeeRequest);
+  }
+  
+  deleteEmployee(id :any): Observable<Employee>{
+    return this.http.delete<Employee> (this.url + 'api/Employee/'+ id);
+  }
 }
